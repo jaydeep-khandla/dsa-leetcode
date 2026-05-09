@@ -1,3 +1,95 @@
+/*
+ * ============================================================
+ * LEETCODE 1095 - Find in Mountain Array
+ * ============================================================
+ *
+ * PROBLEM STATEMENT:
+ * Given a mountain array mountainArr with the following properties:
+ * - mountainArr.length >= 3
+ * - There exists some i with 0 < i < mountainArr.length - 1 such that:
+ *   mountainArr[0] < mountainArr[1] < ... < mountainArr[i-1] < mountainArr[i]
+ *   mountainArr[i] > mountainArr[i+1] > ... > mountainArr[mountainArr.length - 1]
+ * Find the target value in the mountain array. Return the index if found,
+ * else return -1. Must call mountainArr.get(i) to access values.
+ *
+ * Examples:
+ * Input: mountainArr = [1,2,3,4,5,3,1], target = 3 → Output: 2
+ * Input: mountainArr = [0,1,2,4,2,1], target = 3   → Output: -1
+ *
+ * TOPICS: Array, Binary Search
+ * PATTERN: Binary Search on Mountain Array (3-part search)
+ * DIFFICULTY: Hard
+ *
+ * ============================================================
+ * APPROACHES
+ * ============================================================
+ *
+ * 1. PEAK FINDING + BINARY SEARCH (O(log n) time, O(1) space) - OPTIMAL
+ *    First find peak index using binary search (increasing slope).
+ *    Then search left side (ascending) for target. If not found,
+ *    search right side (descending). Return result.
+ *
+ * 2. SINGLE BINARY SEARCH (O(log n) time, O(1) space)
+ *    Use modified binary search that handles both directions.
+ *    More complex but works similarly.
+ *
+ * 3. LINEAR SCAN (O(n) time, O(1) space)
+ *    Find peak linearly, then linear search on both sides.
+ *    Simpler but linear time.
+ *
+ * OPTIMAL SOLUTION: Approach 1 - Three-step: find peak, search left, search right
+ * Key insight: Mountain has two monotonic halves - handle each separately
+ *
+ * ============================================================
+ * LANGUAGE APPROACHES
+ * ============================================================
+ *
+ * C++:
+ * - First find peak using binary search
+ * - Binary search on left half (ascending)
+ * - Binary search on right half (descending)
+ * - Compare with target value
+ *
+ * GO:
+ * - Find peak index
+ * - Binary search with direction flag
+ * - Handle descending order in search
+ *
+ * JAVASCRIPT:
+ * - Find peak first
+ * - Binary search with isDescending flag
+ * - Compare values at each step
+ *
+ * PYTHON:
+ * - Find peak index
+ * - Two binary searches with different bounds
+ * - Combine results
+ *
+ * JAVA:
+ * - Find peak with binary search
+ * - Search left with ascending logic
+ * - Search right with descending logic
+ *
+ * ============================================================
+ * REAL-WORLD APPLICATIONS
+ * ============================================================
+ *
+ * - TERRAIN MAPPING: Finding specific elevation in mountain
+ *   terrain data, topographical analysis.
+ *
+ * - STOCK PRICE ANALYSIS: Finding specific price in stock with
+ *   peak and decline, analyzing price history.
+ *
+ * - TEMPERATURE PROFILES: Finding temperature value in day's
+ *   temperature curve with peak and decline.
+ *
+ * - GAME LEVELS: Finding specific item in mountain-like level
+ *   design, game pathfinding.
+ *
+ * - ENVIRONMENTAL DATA: Analyzing pollutant levels that rise
+ *   then fall, finding threshold values.
+ */
+
 /**
  * // This is MountainArray's API interface.
  * // You should not implement it, or speculate about its implementation
